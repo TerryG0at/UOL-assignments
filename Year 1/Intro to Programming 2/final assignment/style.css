@@ -11,7 +11,13 @@ body{
 }
 
 .container {
-  display: flex;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#nutrition-table-container {
+    margin-right: 50px;
 }
 
 .hover {
@@ -23,17 +29,17 @@ body{
 }
 
 #nutrition-table-container table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
     margin-left: 30px;
 }
 
 #nutrition-table-container th, #nutrition-table-container td {
-  border: 1px solid #ddd;
-  padding: 8px;
+    border: 1px solid #ddd;
+    padding: 8px;
 }
 
 #nutrition-table-container th {
-  background-color: #f2f2f2;
-  text-align: left;
+    background-color: #f2f2f2;
+    text-align: left;
 }

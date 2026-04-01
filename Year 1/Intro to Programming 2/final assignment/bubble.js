@@ -20,17 +20,17 @@ function Bubble(_name) {
         push();
         textAlign(CENTER);
         textSize(12);
-        let labelWidth = textWidth(this.name) + 10; // Add padding
-        let labelHeight = 20; // Fixed height for the label
+        let labelWidth = textWidth(this.name) + 10;
+        let labelHeight = 20;
 
         // Draw background box
-        fill(255); // White color for the box
+        fill(255);
         noStroke();
         rectMode(CENTER);
         rect(this.pos.x, this.pos.y, labelWidth, labelHeight);
 
         // Draw text
-        fill(0); // Black color for the text
+        fill(0);
         text(this.name, this.pos.x, this.pos.y + 5);
         pop();
     }

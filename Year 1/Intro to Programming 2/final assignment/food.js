@@ -1,13 +1,10 @@
 function Food() {
     // Name for the visualisation to appear in the menu bar.
     this.name = 'Food';
-
-    // Each visualisation must have a unique ID with no special characters.
     this.id = 'food';
-
-    // Property to represent whether data has been loaded.
     this.loaded = false;
 
+    // number of bubbles depend on number of data
     var bubbles = [];
     var maxAmt;
     var years = [];
@@ -18,23 +15,20 @@ function Food() {
         var self = this;
         this.data = loadTable(
             './data/food/foodData.csv', 'csv', 'header',
-            // Callback function to set the value this.loaded to true.
             function(table) {
                 self.loaded = true;
             }
         );
     }
 
-    // This is called automatically when the user clicks on the menu button
     this.setup = function() {
         console.log("in set up");
         this.data_setup();
     }
 
-    // This is called automatically when the user clicks on another menu button
     this.destroy = function() {
         console.log("in destroy");
-        // Clear away the years dropdown
+        // clear the years dropdown
         if (yearDropdown) {
             yearDropdown.remove();
         }
@@ -42,16 +36,19 @@ function Food() {
 
     this.draw = function() {
         if (!this.loaded) {
+            // used for debugging
             console.log('Data not yet loaded');
             return;
         }
 
+        // drawing individual bubble each time
         background(255);
-        translate(width / 4 + 100, height / 2); // Adjust this translation to move bubbles closer to the table
+        translate(width / 4 + 100, height / 2);
         for (var i = 0; i < bubbles.length; i++) {
             bubbles[i].update(bubbles);
             bubbles[i].draw();
         }
+        // checking which bubble the mouse is pointed
         for (var i = 0; i < bubbles.length; i++) {
             if (bubbles[i].hover(mouseX - width / 4 - 100, mouseY - height / 2)) {
                 bubbles[i].drawLabel();
@@ -61,16 +58,16 @@ function Food() {
 
     this.data_setup = function() {
         bubbles = [];
-        maxAmt = 0; // Initialize maxAmt to 0
+        maxAmt = 0;
         years = [];
 
         var rows = this.data.getRows();
         var numColumns = this.data.getColumnCount();
 
-        // Create dropdown for each year
+        // create dropdown box for each year
         yearDropdown = createSelect();
-        yearDropdown.position(width / 4 + 10, height + 10); // Adjust position to be below the table
-        yearDropdown.style('width', '150px'); // Set width of the dropdown
+        yearDropdown.position(width / 4 + 10, height + 10);
+        yearDropdown.style('width', '150px');
         yearDropdown.option('Select a year');
         for (var i = 5; i < numColumns; i++) {
             var y = this.data.columns[i];
@@ -78,6 +75,7 @@ function Food() {
             yearDropdown.option(y);
         }
 
+        // when user change to another year, that will trigger to change the bubbles
         yearDropdown.changed(function() {
             var selectedYear = yearDropdown.value();
             if (selectedYear !== 'Select a year') {
@@ -85,22 +83,20 @@ function Food() {
             }
         });
 
-        // Create bubble for each food type
-        // Each bubble consists of data value from 1974 to 2016
+        // create bubble for each food type
         for (var i = 0; i < rows.length; i++) {
             if (rows[i].get(0) != "") {
                 // Set the food name
                 var b = new Bubble(rows[i].get(0));
 
-                // Start from column index 5
                 for (var j = 5; j < numColumns; j++) {
-                    // Get the value for each year
+                    // get the value for each year
                     if (rows[i].get(j) != "") {
                         var n = rows[i].getNum(j);
                         if (n > maxAmt) {
-                            maxAmt = n; // Keep a tally of the highest value
+                            maxAmt = n;
                         }
-                        b.data.push(n); // Push data in
+                        b.data.push(n);
                     } else {
                         // For empty value
                         b.data.push(0);
@@ -112,13 +108,13 @@ function Food() {
 
         for (var i = 0; i < bubbles.length; i++) {
             bubbles[i].setMaxAmt(maxAmt);
-            bubbles[i].setData(0); // Set to the first data
+            bubbles[i].setData(0);
         }
     }
 
+    // function for changing year
     function changeYear(year, _years, _bubbles) {
         var y = _years.indexOf(year);
-        // Set the selected year for all the bubbles
         for (var i = 0; i < _bubbles.length; i++) {
             _bubbles[i].setData(y);
         }
