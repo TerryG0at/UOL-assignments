@@ -1,0 +1,36 @@
+what would I look if I want to know if a pro team think the hero is op or not?
+
+-whether they give attention or not
+
+-They will never consider a hero to use if they can't guarantee a high chance for winning and tournament are usually life and death situation
+
+-They will ban the hero if they cannot find a solution on how to handle
+
+-They will prioritise picking those hero if they are not in the banning list
+
+If a hero is Op, they would have significant win rate compare to other and this is not luck
+
+ban rate > pick rate
+because banning mean they cannot handle and pick rate mean they could
+
+in conclusion to that, pick rate and win rate high would still be considered less powerful than those with higher ban rate
+
+How will I do the table in python?
+highest to lowest on pick and ban rate
+only 25 heroes will be enough
+will pick 15 meta heroes
+
+which column should I focus more on?
+total pick
+win rate
+total pick rate
+total ban
+total ban rate
+total pick and ban
+total pick and ban rate
+
+% for the plot
+number for the label
+*if we want number of win, can do coding for calculation, round(total pick * win rate)
+number of lose is just subtract from total pick
+ 

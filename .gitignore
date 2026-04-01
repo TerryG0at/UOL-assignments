@@ -1,0 +1,29 @@
+# IDEs and System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# C++ / JUCE (OtoDecks)
+Builds/
+Intermediate/
+*.exe
+*.obj
+
+# Python / ML (Year 2 & 3)
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+*.csv
+*.zip
+*.h5
+*.pth
+
+# Java / Node (General)
+target/
+bin/
+node_modules/
+
+# ML
+glove.*
+*.100d

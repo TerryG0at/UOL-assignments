@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terry's Portfolio - Contact Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <!-- Navigation titles -->
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="logo">
+            <!-- text logo -->
+            <a href="index.html" style="text-decoration: none;">Terry</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-section">
+            <h2>Let's Connect Together!</h2>
+            <form class="contact-form">
+                <!-- Name section -->
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" placeholder="Your Full Name" required>
+
+                <!-- Email section -->
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+
+                <!-- message section -->
+                <label for="message">Please write something to me:</label>
+                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <!-- copyright -->
+        <p class="copyright">&copy; 2034 Terry. All rights reserved.</p>
+        <div class="social-icons">
+            <!-- social media icons -->
+            <a href="https://www.linkedin.com/in/phone-thet-paing-74476a21b/" class="social-icon in"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com/tanithmetil.tanithmetil.3/" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/?lang=en" class="social-icon x"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/phone_t_p/" class="social-icon ig"><i class="fab fa-instagram"></i></a>
+            <a href="https://web.telegram.org/" class="social-icon tg"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

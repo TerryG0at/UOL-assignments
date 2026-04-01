@@ -1,0 +1,973 @@
+/* content to disappear if the screen not showing the section and to appear when reach to the section */
+@keyframes fadeIn {
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+/* to make the items rotating */
+/* in my code I use it for scoial media icon to rotate forever */
+@keyframes rotate {
+    from{
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* animation for making elements appear from left side of the screen */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-1000px);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* animation for making elements appear from right side of the screen */
+@keyframes slideInRight {
+    from {
+        transform: translateX(1000px);
+    }
+
+    to {
+        transform: translateX(auto);
+    }
+}
+
+/* animation for making elements go from right to left */
+@keyframes scrollText {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+    background-color: #f2f0f0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 8%; 
+    background-color: #d4d3d3;
+    border-bottom: 1px solid #000;
+    margin-left: -8rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem; 
+    padding: 1rem 0; 
+    margin: 0;
+    margin-left: 2vw;
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    font-size: 1.5vw;
+    font-family: "Helvetica", "Arial", sans-serif; /* Match the font style */
+    color: #000; /* Black text */
+    text-transform: uppercase; /* Make the text all uppercase */
+    letter-spacing: 0.3rem; /* Adjust letter spacing for a modern look */
+    margin-left: 4vw;
+}
+
+/* to indicate which page we are looking at */
+/* put this in my code as some kind of indication */
+.nav-links li a.active {
+    padding: 6px;
+    outline: 2px solid black;
+}
+
+.logo {
+    font-size: 4vw;
+    font-weight: bold;
+    font-family: Monospace;
+    margin-right: 2rem; /* Move logo more towards the center */
+}
+
+.logo a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* to prevent the default color changing setting for visited link */
+/* I don't want to delete the history nor want that default color after I have clicked the link */
+.logo a:visited {
+    color: #000;
+}
+
+/* index css start /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.hero {
+    position: relative;
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    height: 60vh;
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+}
+
+.hero-image {
+    position: absolute;
+    left: -20%;
+    top: 0;
+    width: 60%;
+    height: 100%;
+}
+
+.hero-image img {
+    width: 90%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-text {
+    margin-left: 30%; /* Adjust the left spacing */
+    z-index: 1;
+    background-color: rgba(74, 74, 74, 0.788);
+    padding-left: 2rem;
+    max-width: 100%;
+    color: white;
+    font-family: Monaco;
+    font-size: 4vw;
+    text-shadow: 0.2vw 0.2vw black;
+    /* to make the text appear from right side */
+    animation: slideInRight 1.5s ease-in-out 0s 1 forwards;
+}
+
+.section-divider {
+    border: none;
+    border-top: 2px solid #484848;
+    margin: 2rem 0;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* need 2 because I am using 2 different sizes */
+.section-divider2 {
+    border: none;
+    border-top: 2px solid #484848;
+    margin: 2rem 0;
+    width: 100%; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4rem;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem 5%;
+    color: #531919;
+    margin-top: 8rem;
+    /* to make invisible before reaching */
+    opacity:0;
+    /* will slowly fade in fade out */
+    animation: fadeIn linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
+}
+
+.stat-block {
+    text-align: center;
+    padding: 1rem;
+    border: 6px solid #d45d02;
+    border-radius: 90px;
+    font-size: 1.8vw;
+}
+
+.faq {
+    padding: 2rem 0;
+    width: 50%; 
+    margin-left: auto; 
+    margin-right: auto; 
+    opacity:0;
+    animation: fadeIn linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
+}
+
+.faq h2{
+    font-size: 4rem;
+    margin-left: 40%;
+    margin-bottom: 1rem;
+    margin-top: 4rem;
+}
+
+.faq-item {
+    margin-bottom: 1rem;
+}
+
+.faq-item h3 {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.6rem;
+    font-weight: 550;
+}
+
+.arrow {
+    cursor: pointer;
+}
+
+.answer {
+    display: none;
+    padding: 1rem;
+    background-color: #cecece;
+}
+
+/* index css end */
+
+
+
+/* about css start //////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.about-section h2,
+.education-section h2,
+.volunteer-section h2,
+.hobby-section h2 {
+    color: #003a98; 
+    font-size: 3.5vw;
+}
+
+.about-section p,
+.education-section p,
+.volunteer-section p,
+.hobby-section p { 
+    font-size: 1.5vw;
+}
+
+/* About section */
+.about-section {
+    padding: 2rem 10%;
+    text-align: left;
+    opacity:0;
+    animation: fadeIn linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
+}
+
+/* Education section */
+.education-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 10%;
+    margin-right: 4rem;
+    opacity:0;
+    animation: fadeIn linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
+}
+
+.education-photo {
+    width: 25%;
+}
+
+.education-photo img {
+    width: 100%;
+    /* to make the shape have equal width and height in case you are wondering why I put */
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 4vw;
+}
+
+.education-content {
+    width: 60%;
+}
+
+/* Volunteer section */
+.volunteer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 10%;
+    opacity:0;
+    animation: fadeIn linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
+}
+
+.volunteer-content {
+    width: 60%;
+}
+
+.volunteer-photos {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+    padding-top: 5vw;
+}
+
+.square-frame {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+/* Hobby section */
+.hobby-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 10%;
+    opacity:0;
+    animation: fadeIn linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
+}
+
+.hobby-photo-left,
+.hobby-photo-right {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vw;
+}
+
+/*  text in hobby section */
+.hobby-content {
+    width: 50%;
+    text-align: center;
+    padding: 0 1rem;
+    margin-top: -4rem;
+}
+
+.rectangle-frame {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* about css end */
+
+
+
+/* work css start ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/* l line code */
+.l-line-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6rem;
+}
+
+.l-line-left {
+    border-left: 0.5vw double gray;
+    border-bottom: 0.5vw double gray;
+    height: 100px;
+    width: 300px;
+    display: inline-block;
+    margin-top: 4rem;
+    margin-left: 8rem;
+}
+
+.l-line-right {
+    border-left: 0.5vw double gray;
+    border-bottom: 0.5vw double gray;
+    height: 100px;
+    width: 300px;
+    display: inline-block;
+    /* to reverse the original drawn l line */
+    transform: rotate(180deg);
+    margin-bottom: 4rem;
+    margin-right: 8rem;
+}
+
+/* Project section */
+.projects-section {
+    padding: 2rem 10%;
+}
+
+.projects-section h2 {
+    text-align: center;
+    font-size: 3.5vw;
+    font-weight: bold;
+    color: #3062cf;
+    -webkit-text-stroke: 0.12vw black;
+}
+
+.projects-content {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2vw;
+    gap: 6vw;
+    font-size: 1vw;
+}
+
+.project {
+    text-align: center;
+}
+
+.lazada {
+    animation: slideInLeft 1.5s ease-in-out 0s 1 forwards;
+}
+
+.razer {
+    animation: slideInRight 1.5s ease-in-out 0s 1 forwards;
+}
+
+.lazada, .razer {
+    width: 20vw;
+    height: auto;
+    margin-bottom: 4vw;
+    padding: 1%;
+    border: #000000 solid 0.35vw;
+}
+
+/* Poster section */
+.poster-section {
+    padding: 2rem 10%;
+    opacity:0;
+    animation: fadeIn linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
+}
+
+.poster-section h2 {
+    text-align: center;
+    font-size: 3.5vw;
+    font-weight: bold;
+    color: #3062cf;
+    -webkit-text-stroke: 0.12vw black;
+}
+
+.poster-images {
+    display: flex;
+    justify-content: center;
+    gap: 6vw;
+}
+
+.d1, .d2, .d3, .d4 {
+    width: 17vw;
+    height: 17vw;
+    position: relative;
+    margin-left: 4vw;
+    margin-top: 1vw;
+    margin-bottom: 3vw;
+}
+
+.s1, .s2, .s3, .s4 {
+    height: 17vw;
+    width: auto;
+    position: relative;
+    margin-right: 2vw;
+    margin-top: 1vw;
+    margin-bottom: 3vw;
+}
+
+.d1, .d2, .d3, .d4, .s1, .s2, .s3, .s4 {
+    transition: transform 0.3s ease, z-index 0.3s ease;
+    position: relative;
+}
+
+.d1:hover, .d2:hover, .d3:hover, .d4:hover,
+.s1:hover, .s2:hover, .s3:hover, .s4:hover {
+    transform: scale(1.2);
+    z-index: 2;
+}
+
+/* Photography section */
+.photography-section {
+    padding: 2rem 10%;
+    opacity:0;
+    animation: fadeIn linear forwards;
+    animation-timeline: view();
+    animation-range: entry;
+}
+
+.photography-section h2 {
+    text-align: center;
+    font-size: 3.5vw;
+    font-weight: bold;
+    color: #3062cf;
+    -webkit-text-stroke: 0.12vw black;
+}
+
+.carousel-item img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+    height: auto;
+    object-fit: cover;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black;
+    border-radius: 50%; 
+}
+
+.click-more-text {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 2vw;
+    font-weight: 600;
+}
+
+.click-more-text a {
+    color: red;
+    text-decoration: none;
+}
+
+.click-more-text:hover {
+    transform: scale(1.3);
+}
+
+/* work css end */
+
+
+
+/* contact css start /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.contact-section {
+    padding: 3rem 10%;
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 3vw;
+    margin-bottom: 4vw;
+    margin-top: 0rem;
+    font-family: Arial;
+    letter-spacing: 0.5rem;
+    color: brown;
+    -webkit-text-stroke: #f2f0f0 0.05vw;
+    animation: scrollText 12s linear infinite;
+}
+
+.contact-form {
+    background-color: #f2f0f0;
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form label {
+    display: block;
+    text-align: left;
+    font-size: 1.5vw;
+    margin-bottom: 0.5rem;
+    font-family: "Arial", sans-serif;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 1.2vw;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #3062cf;
+}
+
+.contact-form textarea {
+    height: 8vw;
+    resize: none;
+}
+
+.contact-form button {
+    padding: 1rem 2rem;
+    background-color: #3062cf;
+    color: white;
+    font-size: 1.5vw;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #0047ab;
+}
+
+/* contact css end */
+
+
+
+/* gallery css start //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/* Title Section */
+.gallery-title-section {
+    text-align: center;
+    background-color: #f2f0f0;
+    margin-bottom: -2rem;
+    margin-top: -2rem;
+}
+
+.gallery-title-section h1 {
+    font-size: 4rem;font-weight: 300;
+    font-family: sans-serif;
+    color: #000;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem 10%;
+    background-color: #f2f0f0;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* gallery css end */
+
+
+
+footer {
+    background-color: #f2f0f0;
+    padding: 1rem 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copyright {
+    margin: 0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.social-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    background-color: #786f6f;
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 120%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: rotate 1s linear infinite;
+}
+
+.social-icon i {
+    display: inline-block;
+    line-height: 50px;
+}
+
+.social-icon:hover {
+    background-color: #007bff;
+    transform: scale(1.1);
+    animation: rotate;
+}
+
+/* social media color for hovering */
+.social-icon:hover.in {
+    background-color: #0077b5; /* LinkedIn */
+}
+
+.social-icon:hover.fb {
+    background-color: #3b5998; /* Facebook */
+}
+
+.social-icon:hover.x {
+    background-color: #1da1f2; /* Twitter/X */
+}
+
+.social-icon:hover.ig {
+    background-color: #e4405f; /* Instagram */
+}
+
+.social-icon:hover.tg {
+    background-color: #0088cc; /* Telegram */
+}
+
+@media screen and (max-width: 1050px) {
+
+    /* General comment: most of the code are for resizing and positioning */
+    /* Header */
+    header {
+        text-align: center;
+        margin-left: -2rem;
+    }
+
+    .nav-links li a {
+        margin-left: 0;
+        padding: 1rem 0;
+    }
+
+    .logo {
+        font-size: 4.5vw;
+        margin-right: 0rem;
+    }
+
+    .stats {
+        display: grid;
+        /* to become 2 by 2 grid */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .stat-block {
+        font-size: 2vw;
+        padding: 1rem;
+    }
+
+    /* FAQ section */
+    .faq {
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: -2rem;
+        margin-top: -4rem;
+    }
+
+    .faq h2 {
+        font-size: 3.5vw;
+        text-align: center;
+        margin-right: 100%;
+        margin-bottom: -2rem;
+    }
+
+    .section-divider2 {
+        margin-bottom: 2rem;
+        width: 80%;
+    }
+
+    .faq-item h3 {
+        font-size: 2.5vw;
+    }
+
+    .answer {
+        font-size: 2vw;
+    }
+
+    .projects-content {
+        font-size: 1.4vw;
+        margin-bottom: -2rem;
+    }
+
+    .click-more-text {
+        text-align: center;
+        margin-top: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .contact-section {
+        margin-top: 3rem;
+    }
+
+    /* the outline I made doesn't work with smaller size so I remove and try a new font */
+    .contact-section h2 {
+        font-size: 4vw;
+        margin-bottom: 4rem;
+        margin-top: -2rem;
+        font-family: Arial;
+        letter-spacing: 0.4rem;
+        color: brown;
+        -webkit-text-stroke: #f2f0f0 0vw;
+    }
+}
+
+/* mobile view */
+@media screen and (max-width: 850px) {
+
+    /* General comment: most of the code are for resizing and positioning */
+    /* Header */
+    header {
+        padding: 0rem 5%;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .nav-links li a {
+        font-size: 0.5rem;
+        margin-left: 0;
+        padding: 1rem 0;
+    }
+
+    .hero {
+        flex-direction: column;
+        height: auto;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        justify-content: center;
+    }
+
+    .hero-image {
+        width: 100%;
+        height: 0%;
+    }
+
+    .hero-image img {
+        padding-top: 2rem;
+        width: 80vw;
+        height: 440px;
+    }
+
+    .hero-text {
+        margin-top: 2rem;
+        font-size: 4vw;
+        text-align: center;
+        padding: 0rem 1rem;
+        transform: translateY(300px);
+        margin-left: 0px;
+        animation: none;
+        margin-bottom: 22rem;
+    }
+    
+    .about-section,
+    .education-section,
+    .volunteer-section {
+        margin-bottom: -4vw;
+    }
+
+    .education-section,
+    .volunteer-section {
+        margin-top: -4vw;
+    }
+
+    .projects-section h2, .poster-section h2, .photography-section h2 {
+        text-align: center;
+        font-size: 2rem;
+        -webkit-text-stroke: 0px;
+        margin-bottom: -3rem;
+    }
+
+    .poster-section h2, .photography-section h2 {
+        margin-top: -4rem;
+        margin-bottom: -5rem;
+    }
+
+    /* to remove the line because I don't know what to do */
+    .l-line-left, .l-line-right {
+        display: none;
+    }
+
+    /* positioning and resizing my designs */
+    .d1, .d2, .d3, .d4 {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        margin-left: 4vw;
+        margin-top: 1vw;
+        margin-bottom: 3vw;
+    }
+    
+    .s1, .s2, .s3, .s4 {
+        height: 200px;
+        width: auto;
+        position: relative;
+        margin-right: 2vw;
+        margin-top: 1vw;
+        margin-bottom: 3vw;
+    }
+
+    /* label size adjusting */
+    .contact-form label {
+        display: block;
+        text-align: left;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-family: "Arial", sans-serif;
+    }
+    
+    /* message me textarea layout adjusting */
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        font-size: 0.7rem;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* Footer */
+    footer {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    /* to move social media icons to the center */
+    .social-icons {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    /* reducing the size of social media icons */
+    .social-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1.5rem;
+    }
+}

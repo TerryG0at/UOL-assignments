@@ -1,0 +1,35 @@
+<!-- Site setting -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Site Settings</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+  <h1 class="page-heading">Site Settings</h1>
+
+  <!-- Card Wrapper -->
+  <div class="settings-card">
+    <form action="/organiser/settings" method="POST" autocomplete="off">
+
+      <!-- Site Name -->
+      <div class="form-group">
+        <label for="site_name">Site Name</label>
+        <input type="text" id="site_name" name="site_name" value="<%= site.site_name %>" required>
+      </div>
+
+      <!-- Site Description -->
+      <div class="form-group">
+        <label for="site_description">Site Description</label>
+        <textarea id="site_description" name="site_description" rows="3" required><%= site.site_description %></textarea>
+      </div>
+      <button type="submit" class="btn">Save Settings</button>
+    </form>
+  </div>
+
+  <!-- Back button to organiser page/organiser.ejs -->
+  <a href="/organiser" class="back-link">Back to Home</a>
+</body>
+</html>

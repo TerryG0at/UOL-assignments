@@ -1,0 +1,76 @@
+<!-- Individual Event Page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendee Event Page</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+    <h1 class="page-heading">Attendee Event Page</h1>
+    <div class="card">
+        <div class="event-header-row">
+            <h2 class="event-title"><%= event.event_title %></h2>
+            <span class="event-date"><strong>Date:</strong> <%= event.event_date %></span>
+        </div>
+        <% if (event.event_poster_url) { %>
+            <div class="event-poster-center">
+                <img src="/uploads/<%= event.event_poster_url %>" class="bio-event-poster attendee-poster" alt="Event Poster">
+            </div>
+        <% } %>
+        <p class="event-description"><%= event.event_description %></p>
+
+        <div class="ticket-section">
+            <form action="/attendee/<%= event.event_id %>/book" method="POST">
+                <div class="ticket-type-row">
+                <label for="ticket_id">Ticket Type</label>
+                <select name="ticket_id" id="ticket_id" required onchange="updateAvailable()">
+                    <% tickets.forEach((ticket, idx) => {
+                    const available = ticket.ticket_quantity_total - (ticket.ticket_quantity_sold || 0);
+                    if (available > 0) { %>
+                        <option value="<%= ticket.ticket_id %>" data-available="<%= available %>">
+                        <%= ticket.ticket_type %> ($<%= (ticket.ticket_price_cents / 100).toFixed(2) %>)
+                        </option>
+                    <% } }); %>
+                </select>
+                <span id="available-ticket-count" class="available-ticket-count"></span>
+                </div>
+
+                <label for="quantity">Quantity</label>
+                <input type="number" name="quantity" min="1" max="<%= tickets[0].ticket_quantity_total - (tickets[0].ticket_quantity_sold || 0) %>" value="1" required>
+                <label for="attendee_name">Your Name</label>
+                <input type="text" name="attendee_name" required>
+                <div class="button-row">
+                    <button type="submit" class="btn">Book</button>
+                </div>
+                
+            </form>
+            
+        </div>
+    </div>
+    <a href="/attendee" class="back-link">Back to Events</a>
+
+    <!-- JS script for updating the ticket availability in real time -->
+    <script>
+        function updateAvailable() {
+        var select = document.getElementById('ticket_id');
+        var countSpan = document.getElementById('available-ticket-count');
+        var selected = select.options[select.selectedIndex];
+        var available = selected ? selected.getAttribute('data-available') : '';
+        countSpan.textContent = "Available: " + available;
+        }
+        // Call once on load
+        document.addEventListener('DOMContentLoaded', updateAvailable);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('error') === 'overbook') {
+            window.alert('Sorry, not enough tickets available. Please try a smaller quantity.');
+            }
+        });
+    </script>
+
+</body>
+</html>
+

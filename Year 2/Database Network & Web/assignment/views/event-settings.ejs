@@ -1,0 +1,99 @@
+<!-- Event Setting Page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Settings</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+  <h1 class="page-heading">Event Settings</h1>
+  <div class="card">
+
+    <!-- Main Event Edit Form -->
+    <form action="/organiser/events/<%= event.event_id %>/edit" method="POST" enctype="multipart/form-data">
+
+      <!-- Title -->
+      <div>
+        <label for="event_title">Title</label>
+        <input type="text" id="event_title" name="event_title" value="<%= event.event_title %>" required>
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label for="event_description">Description</label>
+        <textarea id="event_description" name="event_description" style="height: 150px;" required><%= event.event_description %></textarea>
+      </div>
+
+      <!-- Date -->
+      <div>
+        <label for="event_date">Date</label>
+        <input type="date" id="event_date" name="event_date" value="<%= event.event_date %>" style="width: 10em;" required>
+      </div>
+
+      <!-- Image Upload -->
+      <label for="event_poster">Upload Poster Image</label>
+      <input type="file" id="event_poster" name="event_poster" accept="image/*">
+      <input type="hidden" name="existing_poster_url" value="<%= event.event_poster_url %>">
+      <% if (event.event_poster_url) { %>
+        <img src="/uploads/<%= event.event_poster_url %>" alt="Current Poster" style="max-width:180px; display:block; margin-top:0.6em;">
+      <% } %>
+
+      <!-- Button -->
+      <div style="margin-top: 1.2em; display: flex; gap: 1em;">
+        <button type="submit" class="btn">Save Changes</button>
+        <a href="/organiser" class="btn">Cancel</a>
+      </div>
+    </form>
+
+    <!-- Ticket Types Table -->
+    <h3 style="margin-top:2em;">Ticket Types</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Price</th>
+          <th>Total Qty</th>
+          <th>Sold</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (tickets.length === 0) { %>
+          <tr>
+            <td colspan="5">No ticket types yet.</td>
+          </tr>
+        <% } else { %>
+          <% tickets.forEach(ticket => { %>
+            <tr>
+              <td><%= ticket.ticket_type %></td>
+              <td>$<%= (ticket.ticket_price_cents / 100).toFixed(2) %></td>
+              <td><%= ticket.ticket_quantity_total %></td>
+              <td><%= ticket.ticket_quantity_sold || 0 %></td>
+              <td>
+                <form action="/organiser/events/<%= event.event_id %>/tickets/<%= ticket.ticket_id %>/edit" method="GET" style="display:inline">
+                  <button type="submit" class="btn">Edit</button>
+                </form>
+                <form action="/organiser/events/<%= event.event_id %>/tickets/<%= ticket.ticket_id %>/delete" method="POST" style="display:inline">
+                  <button type="submit" class="btn btn-delete">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }); %>
+        <% } %>
+      </tbody>
+    </table>
+
+    <!-- Add Ticket Form -->
+    <h4 style="margin-top:2em;">Add Ticket Type</h4>
+    <form class="add-ticket-form" action="/organiser/events/<%= event.event_id %>/tickets/add" method="POST">
+      <input type="text" name="ticket_type" placeholder="Type (e.g., Full Price)" required>
+      <input type="number" name="ticket_price_cents" placeholder="Price in cents" min="0" required>
+      <input type="number" name="ticket_quantity_total" placeholder="Quantity" min="1" required>
+      <button type="submit" class="btn">Add Ticket</button>
+    </form>
+
+  </div>
+</body>
+</html>

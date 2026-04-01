@@ -1,0 +1,47 @@
+<!-- Attendee Page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendee Home Page</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+    <h1 class="page-heading">Attendee Home Page</h1>
+
+    <!-- Site info from organiser site setting -->
+    <div class="site-info">
+        <div class="site-name"><%= site.site_name %></div>
+        <div class="site-description"><%= site.site_description %></div>
+    </div>
+
+    <!-- Display events in grid -->
+    <div class="event-list-container">
+        <div class="event-list">
+
+            <!-- Print event poster, title and the date -->
+            <% events.forEach(event => { %>
+                <% if (event.event_poster_url) { %>
+                <a class="bio-event-card" href="/attendee/<%= event.event_id %>">
+                    <img class="bio-event-poster" src="/uploads/<%= event.event_poster_url %>" alt="Event Poster">
+                    <div class="bio-event-header-row">
+                        <span class="bio-event-title"><%= event.event_title %></span>
+                        <span class="bio-event-date"><%= event.event_date %></span>
+                    </div>
+                </a>
+                <% } else { %>
+
+                <!-- Haven't implement but just to print title and date if no image is found in DB -->
+                <a class="event-list-item" href="/attendee/<%= event.event_id %>">
+                    <div class="event-list-item-title"><%= event.event_title %></div>
+                    <div class="event-list-item-date"><%= event.event_date %></div>
+                </a>
+                <% } %>
+            <% }) %>
+        </div>
+        <a href="/" class="back-link">Logout</a>
+    </div>   
+
+</body>
+</html>

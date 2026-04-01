@@ -1,0 +1,76 @@
+<!-- New Event Page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Event</title>
+    <link rel="stylesheet" href="/main.css">
+
+    <!-- JS script for adding ticket row in table -->
+    <script>
+    function addTicketRow() {
+        const tbody = document.getElementById('tickets-body');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><input type="text" name="ticket_type[]" placeholder="Type (e.g., VIP)" required></td>
+            <td><input type="number" name="ticket_price_cents[]" placeholder="Price in cents" min="0" required></td>
+            <td><input type="number" name="ticket_quantity_total[]" placeholder="Quantity" min="1" required></td>
+            <td><button type="button" class="btn btn-delete" onclick="this.closest('tr').remove()">Delete</button></td>
+        `;
+        tbody.appendChild(row);
+    }
+    window.onload = function() {
+        document.getElementById('add-ticket-btn').onclick = addTicketRow;
+        addTicketRow(); // Add first row by default
+    };
+    </script>
+</head>
+<body>
+    <h1 class="page-heading">New Event</h1>
+    <div class="card">
+        <form action="/organiser/events/new" method="POST" autocomplete="off" enctype="multipart/form-data">
+
+            <!-- Title -->
+            <div>
+                <label for="event_title">Title</label>
+                <input type="text" id="event_title" name="event_title" required>
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label for="event_description">Description</label>
+                <textarea id="event_description" name="event_description" style="height: 150px" required></textarea>
+            </div>
+
+            <!-- Date -->
+            <div>
+                <label for="event_date">Date</label>
+                <input type="date" id="event_date" name="event_date" style="width: 10em;" required>
+            </div>
+
+            <!-- Image Upload -->
+            <label for="event_poster">Upload Poster Image</label>
+            <input type="file" id="event_poster" name="event_poster" accept="image/*"> 
+
+            <h3>Ticket Types</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tickets-body"></tbody>
+            </table>
+            <button type="button" id="add-ticket-btn" class="btn">Add Ticket Type</button>
+            <div class="action-row">
+                <button type="submit" class="btn">Create Event</button>
+                <a href="/organiser" class="btn">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

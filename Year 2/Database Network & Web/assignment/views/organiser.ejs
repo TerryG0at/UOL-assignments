@@ -1,0 +1,117 @@
+<!-- Organiser Page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Organiser Page</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+    <h1 class="page-heading">Organiser Page</h1>
+        <div class="card site-header-card">
+
+            <!-- Manager Name and Description -->
+            <div class="manager-info">
+                <div class="manager-name">Terry's Event Management Site</div>
+                <div class="manager-description">
+                    <!-- Place holder for description(change for future use.....) -->
+                    Welcome to the Management System. If you need help with the system, please call 29939949
+                </div>
+
+                <!-- Links to site-settings.ejs and event-new.ejs -->
+                <div class="manager-actions">
+                <a href="/organiser/settings" class="btn">Site Settings</a>
+                <a href="/organiser/events/new" class="btn">Create New Event</a>
+                </div>
+            </div>
+        </div>
+        <nav>
+        </nav>
+
+        <div class="card">
+            <h2>All Events</h2>
+            <form id="event-action-form" method="POST">
+
+                <!-- Event table, same format as ticket table -->
+                <table class="ticket-table">
+                <thead>
+                    <tr>
+                    <th></th>
+                    <th style="width: 20%;">Event Name</th>
+                    <th>Event Date</th>
+                    <th>Created/Published Date</th>
+                    <th>Ticket Type</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Load all the events -->
+                    <% allEvents.forEach(event => { %>
+                    <tr>
+                        <td>
+                        <!-- Radio button to select event -->
+                        <input type="radio" name="selectedEvent" value="<%= event.event_id %>" required>
+                        </td>
+                        <td><%= event.event_title %></td>
+                        <td><%= event.event_date %></td>
+                        <!-- Change the date to publish date from created date if publish -->
+                        <td>
+                            <% if (event.published_date) { %>
+                                <%= event.published_date %>
+                            <% } else { %>
+                                <%= event.event_created_date %>
+                            <% } %>
+                        </td>
+                        <td>
+                            <select class="ticket-type-dropdown" data-event-id="<%= event.event_id %>">
+                                <!-- Display the ticket type and price in term of dollar -->
+                                <% event.tickets.forEach(ticket => { %>
+                                <option value="<%= ticket.ticket_id %>"
+                                    data-quantity="<%= ticket.ticket_quantity_total - ticket.ticket_quantity_sold %>">
+                                    <%= ticket.ticket_type %> ($<%= (ticket.ticket_price_cents / 100).toFixed(2) %>)
+                                </option>
+                                <% }); %>
+                            </select>
+                        </td>
+                        <td>
+                            <!-- Display available ticket -->
+                            <span class="ticket-quantity" id="ticket-quantity-<%= event.event_id %>">
+                                <% if (event.tickets.length > 0) { %>
+                                <%= event.tickets[0].ticket_quantity_total - event.tickets[0].ticket_quantity_sold %>
+                                <% } else { %>
+                                N/A
+                                <% } %>
+                            </span>
+                        </td>
+                        <!-- Update Status -->
+                        <td><%= event.published_date ? "Published" : "Draft" %></td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+                </table>
+                <div style="text-align: right; margin-top: 1.3em;">
+                <button formaction="/organiser/events/action/edit" formmethod="GET" class="btn">Edit</button>
+                <button formaction="/organiser/events/action/publish" formmethod="POST" class="btn">Publish</button>
+                <button formaction="/organiser/events/action/delete" formmethod="POST" class="btn btn-delete">Delete</button>
+            </div>
+            </form>
+        </div>
+    <a href="/organiser/logout" class="back-link">Logout</a>
+
+    <!-- JS script for ticket dropdown interaction -->
+    <script>
+    document.querySelectorAll('.ticket-type-dropdown').forEach(function(dropdown) {
+        dropdown.addEventListener('change', function() {
+            const selected = dropdown.options[dropdown.selectedIndex];
+            const quantity = selected.getAttribute('data-quantity');
+            const eventId = dropdown.getAttribute('data-event-id');
+            const quantitySpan = document.getElementById('ticket-quantity-' + eventId);
+            if (quantitySpan) quantitySpan.textContent = quantity;
+        });
+    });
+    </script>
+</body>
+</html>

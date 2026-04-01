@@ -1,0 +1,40 @@
+<!-- Ticket Editing Page -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Ticket Type</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+  <h1 class="page-heading">Edit Ticket Type for "<%= event.event_title %>"</h1>
+  <div class="card">
+    <form action="/organiser/events/<%= event.event_id %>/tickets/<%= ticket.ticket_id %>/edit" method="POST">
+      <!-- Ticket Type -->
+      <div>
+        <label for="ticket_type">Type</label>
+        <input type="text" id="ticket_type" name="ticket_type" value="<%= ticket.ticket_type %>" required>
+      </div>
+
+      <!-- Ticket Price -->
+      <div>
+        <label for="ticket_price_cents">Price (in cents)</label>
+        <input type="number" id="ticket_price_cents" name="ticket_price_cents" value="<%= ticket.ticket_price_cents %>" min="0" required>
+      </div>
+
+      <!-- Ticket Quantity -->
+      <div>
+        <label for="ticket_quantity_total">Quantity</label>
+        <input type="number" id="ticket_quantity_total" name="ticket_quantity_total" value="<%= ticket.ticket_quantity_total %>" min="1" required>
+      </div>
+
+      <!-- Buttons -->
+      <div>
+        <button type="submit" class="btn">Save Ticket Changes</button>
+        <a href="/organiser/events/<%= event.event_id %>/event-settings" class="btn" style="margin-left:1em;">Cancel</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!-- Error Page in case of error -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Error</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+  <h1 class="page-heading">An Error Occurred</h1>
+  <div class="card">
+    <h2>Sorry, something went wrong.</h2>
+    <% if (error && error.stack) { %>
+      <pre><%= error.stack %></pre>
+    <% } %>
+  </div>
+</body>
+</html>
